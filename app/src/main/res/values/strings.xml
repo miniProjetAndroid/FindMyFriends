@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FindMyFriends</string>
+
+    <string name="ipAdress">http://192.168.43.88:8080/FindMyFriendsWS-war</string>
+</resources>
