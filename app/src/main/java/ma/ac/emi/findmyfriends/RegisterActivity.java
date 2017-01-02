@@ -1,22 +1,14 @@
 package ma.ac.emi.findmyfriends;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -29,11 +21,10 @@ import java.io.IOException;
 
 import customfonts.MyEditText;
 import customfonts.MyTextView;
-import entities.Lieu;
+
 import entities.Personne;
 
-public class RegisterActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class RegisterActivity extends AppCompatActivity {
 
     TextView signinhere;
 
@@ -44,11 +35,10 @@ public class RegisterActivity extends AppCompatActivity implements
     MyEditText firstNameET;
     MyEditText emailET;
     MyEditText passwordET;
+    MyEditText phoneET;
     ProgressBar progress;
     MyTextView errorMsg;
 
-    GoogleApiClient mGoogleApiClient;
-    Lieu lastLieu = new Lieu();
 
 
     @Override
@@ -66,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity implements
             }
         });
 
-
         fonts1 = Typeface.createFromAsset(RegisterActivity.this.getAssets(),
                 "fonts/Lato-Regular.ttf");
 
@@ -80,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity implements
         firstNameET = (MyEditText) findViewById(R.id.firstname);
         emailET = (MyEditText) findViewById(R.id.email);
         passwordET = (MyEditText) findViewById(R.id.password);
+        phoneET = (MyEditText) findViewById(R.id.phone);
         progress = (ProgressBar) findViewById(R.id.progress);
         errorMsg = (MyTextView) findViewById(R.id.errorMsg);
 
@@ -90,20 +80,11 @@ public class RegisterActivity extends AppCompatActivity implements
             }
         });
 
-        // Create an instance of GoogleAPIClient.
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
 
     }
 
     /**
      * Method gets triggered when Register button is clicked
-     *
      */
     public void registerUser() {
         // Get NAme ET control value
@@ -115,11 +96,12 @@ public class RegisterActivity extends AppCompatActivity implements
 
         // Get Password ET control value
         String password = passwordET.getText().toString();
+        String telephone = phoneET.getText().toString();
 
         // Instantiate Http Request Param Object
         RequestParams params = new RequestParams();
         // When Name Edit View, Email Edit View and Password Edit View have values other than Null
-        if (Utility.isNotNull(lastname) && Utility.isNotNull(firstname) && Utility.isNotNull(email) && Utility.isNotNull(password)) {
+        if (Utility.isNotNull(lastname) && Utility.isNotNull(firstname) && Utility.isNotNull(email) && Utility.isNotNull(password) && Utility.isNotNull(telephone) ) {
             // When Email entered is Valid
             if (Utility.validate(email)) {
                 if (Utility.validateName(lastname) && Utility.validateName(firstname)) {
@@ -128,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements
                     personne.setNom(lastname);
                     personne.setPrenom(firstname);
                     personne.setMotDePasse(password);
-                    personne.setLieu(lastLieu);
+                    personne.setTelephone(telephone);
 
                     ObjectMapper mapper = new ObjectMapper();
                     String personneString = "";
@@ -236,42 +218,4 @@ public class RegisterActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            lastLieu.setLatitude(mLastLocation.getLatitude());
-            lastLieu.setLongitude(mLastLocation.getLongitude());
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
 }
