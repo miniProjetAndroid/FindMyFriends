@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="10dp"
     android:background="#f2f2f2"
     android:elevation="8dp"
-    android:layout_margin="10dp"
+    android:orientation="vertical"
 
 
     >
@@ -14,71 +14,77 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_margin="10dp"
         android:background="#fff"
 
-        android:layout_margin="10dp"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="10dp"
-            >
+            android:orientation="vertical">
 
 
             <LinearLayout
-                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginRight="5dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <customfonts.MyTextView
                         android:id="@+id/nomComplet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Trump’s Plan for AmericanMade iPhonew Wold Be Disastrous. Trump’s Plan for AmericanMade iPhonew Wold Be Disastrous"
-                        android:lines="3"
-                        android:textSize="17dp"
-                        android:textColor="@color/listtext"
                         android:lineSpacingExtra="3dp"
+                        android:lines="3"
                         android:maxLines="3"
-                        />
+                        android:text="Trump’s Plan for AmericanMade iPhonew Wold Be Disastrous. Trump’s Plan for AmericanMade iPhonew Wold Be Disastrous"
+                        android:textColor="@color/listtext"
+                        android:textSize="17dp" />
 
                     <customfonts.MyTextView
                         android:id="@+id/infosPersonne"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Why even a President Trump couldn’t make Apple manufacture iPhone in the state."
                         android:layout_marginTop="13dp"
-                        android:textSize="13dp"
-                        android:textColor="@color/listsub1"
                         android:lineSpacingExtra="3dp"
-                        />
+                        android:text="Why even a President Trump couldn’t make Apple manufacture iPhone in the state."
+                        android:textColor="@color/listsub1"
+                        android:textSize="13dp" />
 
-
-                    <Button
-                        android:text="Supprimer"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/button_supprimer_de_liste_amis" />
+                        android:orientation="horizontal">
 
 
+                        <Button
+                            android:id="@+id/button_supprimer_de_liste_amis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delete" />
+
+
+                        <Button
+                            android:id="@+id/button_localiser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Find" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="2.2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="2.2"
                     android:orientation="vertical"
 
                     >
@@ -89,9 +95,8 @@
 
                         android:layout_width="250px"
                         android:layout_height="250px"
-                        android:src="@mipmap/default_user"
                         android:scaleType="fitXY"
-                        />
+                        android:src="@mipmap/default_user" />
 
                 </LinearLayout>
 
