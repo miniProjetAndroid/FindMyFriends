@@ -2,4 +2,14 @@
     <string name="app_name">FindMyFriends</string>
 
     <string name="ipAdress">http://192.168.43.88:8080/FindMyFriendsWS-war</string>
+
+    <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_look_for_friend">LookForFriendActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
 </resources>
